@@ -16,18 +16,27 @@ model recipe {
   name         String
   description  String?
   ingredients  String?
-  instructions String
+  instructions steps    @relation(fields: [stepsId], references: [id])
   image        String?
   authorID     String?
   tags         tags?    @relation(fields: [tagsId], references: [id])
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  stepsId      Int      @unique
   tagsId       Int?
+}
+
+model steps {
+  id        Int      @id @default(sequence())
+  step      String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  recipe    recipe?
 }
 
 model tags {
   id        Int      @id @default(sequence())
-  name      String @default("No Tag")
+  name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   recipes   recipe[]
