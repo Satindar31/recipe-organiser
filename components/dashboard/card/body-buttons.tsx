@@ -29,11 +29,13 @@ export default function ButtonsBody({ recipeID }: { recipeID: Number }) {
     }).then((res) => {
       if (res.ok) {
         toast.success("Successfuly deleted recipe.");
-        router.refresh();
+        return router.refresh();
       } else {
         console.log(res);
-        toast.error("Something went wrong.");
-        router.refresh();
+        res.json().then((data) => {
+          toast.error("Something went wrong. Error code: " + data.code);
+        });
+        return router.refresh();
       }
     });
   }

@@ -22,7 +22,6 @@ export default async function Dashboard() {
   });
   const resJSON = await res.json();
   const data: IRecipe[] = await resJSON.data;
-  console.log(resJSON.totalRecipiesCount);
 
   return (
     <div className="bg-white text-black">
