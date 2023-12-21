@@ -21,7 +21,7 @@ export default function CreateRecipeForm({ userID }: { userID: string}) {
   function createRecipe(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    fetch("/api/createRecipe", {
+    fetch(process.env.NEXT_PUBLIC_URL + "/api/createRecipe", {
       cache: "no-cache",
       method: "POST",
       body: JSON.stringify({
