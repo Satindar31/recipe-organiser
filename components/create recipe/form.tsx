@@ -41,7 +41,7 @@ export default function CreateRecipeForm({ userID }: { userID: string}) {
 
   function createRecipeBtn() {
     setLoading(true);
-    fetch("http://localhost:3000/api/createRecipe", {
+    fetch("/api/createRecipe", {
       cache: "no-cache",
       method: "POST",
       body: JSON.stringify({
