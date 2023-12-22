@@ -4,19 +4,20 @@ import { Input } from "@nextui-org/input";
 import { Textarea } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 import { Editor } from "novel";
-import React from "react";
+import React, { useEffect } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { JSONContent } from "@tiptap/react";
 
-export default function CreateRecipeForm({ userID }: { userID: string}) {
-
-  const router = useRouter()
+export default function CreateRecipeForm({ userID }: { userID: string }) {
+  const router = useRouter();
 
   const [name, setName] = React.useState("");
   const [steps, setSteps] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [ingredients, setIngredients] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [stepsJSON, setStepsJSON] = React.useState<any>();
 
   function createRecipe(e: React.FormEvent) {
     e.preventDefault();
@@ -30,6 +31,7 @@ export default function CreateRecipeForm({ userID }: { userID: string}) {
         description: description,
         ingredients,
         userID,
+        stepsJSON: stepsJSON,
       }),
     })
       .then((res) => res.json())
@@ -50,19 +52,19 @@ export default function CreateRecipeForm({ userID }: { userID: string}) {
         description: description,
         ingredients,
         userID,
+        stepsJSON: stepsJSON,
       }),
-    }).then(res => {
-      setLoading(false)
-      if(res.ok) {
-        toast.success("Successfuly created recipe.")
-        router.refresh()
-        router.push('/dashboard')
+    }).then((res) => {
+      setLoading(false);
+      if (res.ok) {
+        toast.success("Successfuly created recipe.");
+        router.refresh();
+        router.push("/dashboard");
+      } else {
+        toast.error("Something went wrong. Try again.");
+        router.refresh();
       }
-      else {
-        toast.error("Something went wrong. Try again.")
-        router.refresh()
-      }
-    })
+    });
   }
   return (
     <form
@@ -109,6 +111,7 @@ export default function CreateRecipeForm({ userID }: { userID: string}) {
       <Editor
         onUpdate={(e) => {
           setSteps(e?.getHTML() ?? "");
+          setStepsJSON(e?.getJSON() ?? "");
         }}
         defaultValue="Hello!"
       />

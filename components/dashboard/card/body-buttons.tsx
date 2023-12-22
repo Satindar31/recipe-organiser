@@ -3,10 +3,26 @@
 import { IconTrash } from "@tabler/icons-react";
 import { Button } from "@nextui-org/button";
 import { toast } from "sonner";
-import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
+import EditBtn from "./editBtn";
+import { JSONContent } from "@tiptap/react";
+import { title } from "process";
 
-export default function ButtonsBody({ recipeID }: { recipeID: Number }) {
+export default function ButtonsBody({
+  recipeID,
+  name,
+  description,
+  steps,
+  ingridients,
+  stepsJSON,
+}: {
+  recipeID: Number;
+  name: String;
+  description: String;
+  steps: String;
+  ingridients: String;
+  stepsJSON: JSONContent;
+}) {
   const router = useRouter();
 
   /**
@@ -41,11 +57,18 @@ export default function ButtonsBody({ recipeID }: { recipeID: Number }) {
   }
 
   return (
-    <>
-      <Button>Edit</Button>
-      <Button color="danger" onClick={() => deleteRecipe(recipeID)}>
+    <div className="flex gap-2 flex-col">
+      <EditBtn
+        description={description}
+        ingridients={ingridients}
+        name={name}
+        recipeID={recipeID}
+        steps={steps}
+        stepsJSON={stepsJSON}
+      />
+      <Button color="danger" onClick={() => deleteRecipe(recipeID)} variant="bordered">
         <IconTrash />
       </Button>
-    </>
+    </div>
   );
 }

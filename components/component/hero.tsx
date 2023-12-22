@@ -3,9 +3,10 @@ import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
 import { Avatar } from "@/components/ui/avatar";
 import Image from "next/image";
 import { JSX, SVGProps } from "react";
-import { SignUpButton } from "@clerk/nextjs";
+import { SignUpButton, currentUser } from "@clerk/nextjs";
 
-export function HomeComp() {
+export async function HomeComp() {
+  const user = await currentUser();
   return (
     <div className="flex flex-col min-h-screen">
       <header className="px-4 lg:px-6 h-16 flex items-center">
@@ -63,9 +64,11 @@ export function HomeComp() {
                   </p>
                 </div>
                 <div className="flex-col gap-2 min-[400px]:flex-row inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50">
-                  <SignUpButton mode="modal" redirectUrl="/dashboard">
-                    Get Started
-                  </SignUpButton>
+                  {!user ? (
+                    <SignUpButton>Get started</SignUpButton>
+                  ) : (
+                    <Link href="/dashboard">Go to dashboard</Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -98,9 +101,7 @@ export function HomeComp() {
                     src="/hero-stock.jpg"
                     width="200"
                   />
-                  <p className="text-gray-500 dark:text-gray-400">
-                    Diabeties
-                  </p>
+                  <p className="text-gray-500 dark:text-gray-400">Diabeties</p>
                 </CardContent>
               </Card>
               <Card>
@@ -115,9 +116,7 @@ export function HomeComp() {
                     src="/hero-stock.jpg"
                     width="200"
                   />
-                  <p className="text-gray-500 dark:text-gray-400">
-                    IDK OK?
-                  </p>
+                  <p className="text-gray-500 dark:text-gray-400">IDK OK?</p>
                 </CardContent>
               </Card>
             </div>

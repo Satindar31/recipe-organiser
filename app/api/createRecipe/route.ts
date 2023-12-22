@@ -1,6 +1,7 @@
 import { log } from "@logtail/next";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
+import type { JSONContent } from "@tiptap/react"
 
 export async function POST(req: Request) {
   const {
@@ -9,14 +10,17 @@ export async function POST(req: Request) {
     description,
     ingredients,
     userID,
+    stepsJSON
   }: {
     name: string;
     steps: string;
     description: string;
     ingredients: string;
     userID: string;
+    stepsJSON: JSONContent
   } = await req.json();
 
+  stepsJSON.sd
   try {
     const recipe = await prisma.recipe.create({
       data: {
@@ -25,6 +29,7 @@ export async function POST(req: Request) {
         description: description,
         ingredients: ingredients,
         authorID: userID,
+        stepsJSON: stepsJSON
       },
     });
     return new Response(JSON.stringify(recipe), {

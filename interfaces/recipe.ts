@@ -1,3 +1,5 @@
+import { JSONContent } from "@tiptap/react";
+
 interface IRecipe {
   id: Number;
   name: String;
@@ -10,6 +12,7 @@ interface IRecipe {
   createdAt: Date;
   updatedAt: Date;
   tagsId: Number;
+  stepsJSON: JSONContent;
 }
 
 interface ITags {

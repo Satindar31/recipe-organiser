@@ -40,16 +40,17 @@ export default async function Dashboard() {
         {resJSON.totalRecipiesCount == 0 ? (
           <>
             <h2 className="font-semibold text-4xl">Create your first recipe</h2>
-            <Link href="/dashboard/create-recipe">
-              <Button variant="solid">Create recipe</Button>
-            </Link>
+
+            <Button href="/dashboard/create-recipe" as={Link} variant="solid">
+              Create recipe
+            </Button>
           </>
         ) : (
           <>
             <h2 className="font-semibold text-4xl">Your recipes</h2>
-            <Link href="/dashboard/create-recipe">
-              <Button variant="solid">Create recipe</Button>
-            </Link>
+            <Button href="/dashboard/create-recipe" as={Link} variant="solid">
+              Create recipe
+            </Button>
             <></>
             {data.map((recipe) => (
               <Card
@@ -61,7 +62,14 @@ export default async function Dashboard() {
                 </CardHeader>
                 <Divider />
                 <CardBody>
-                  <ButtonsBody recipeID={recipe.id} />
+                  <ButtonsBody
+                    description={recipe.description}
+                    ingridients={recipe.ingredients}
+                    name={recipe.name}
+                    recipeID={recipe.id}
+                    steps={recipe.instructions}
+                    stepsJSON={recipe.stepsJSON}
+                  />
                 </CardBody>
               </Card>
             ))}

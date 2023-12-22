@@ -23,11 +23,12 @@ model recipe {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   tagsId       Int?
+  stepsJSON    Json @default("{}")
 }
 
 model tags {
   id        Int      @id @default(sequence())
-  name      String @default("No Tag")
+  name      String   @default("No Tag")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   recipes   recipe[]
