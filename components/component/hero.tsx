@@ -4,6 +4,7 @@ import { Avatar } from "@/components/ui/avatar";
 import Image from "next/image";
 import { JSX, SVGProps } from "react";
 import { SignUpButton, currentUser } from "@clerk/nextjs";
+import Script from "next/script";
 
 export async function HomeComp() {
   const user = await currentUser();
@@ -42,6 +43,7 @@ export async function HomeComp() {
           </Link>
         </nav>
       </header>
+      <Script strategy="afterInteractive" src="https://savorsync-status.instatus.com/en/5329dd7e/widget/script.js" />
       <main className="flex-1">
         <section className="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-48">
           <div className="container px-4 md:px-6">
