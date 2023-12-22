@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
 import { Avatar } from "@/components/ui/avatar";
 import Image from "next/image";
-import { JSX, SVGProps } from "react";
+import { JSX, SVGProps, Suspense } from "react";
 import { SignUpButton, currentUser } from "@clerk/nextjs";
 import Script from "next/script";
 
@@ -43,7 +43,10 @@ export async function HomeComp() {
           </Link>
         </nav>
       </header>
-      <Script strategy="afterInteractive" src="https://savorsync-status.instatus.com/en/5329dd7e/widget/script.js" />
+      <Script
+        strategy="afterInteractive"
+        src="https://savorsync-status.instatus.com/en/5329dd7e/widget/script.js"
+      />
       <main className="flex-1">
         <section className="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-48">
           <div className="container px-4 md:px-6">
@@ -174,6 +177,18 @@ export async function HomeComp() {
         <p className="text-xs text-gray-500">
           © RecipeShare. All rights reserved.
         </p>
+        <Suspense fallback={<div>Loading...</div>}>
+          <iframe
+            src="https://savorsync-status.instatus.com/embed-status/5329dd7e/light-md"
+            width="230"
+            height="61"
+            frameBorder="0"
+            scrolling="no"
+            style={{
+              border: "none",
+            }}
+          ></iframe>
+        </Suspense>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link className="text-xs hover:underline underline-offset-4" href="#">
             Terms of Service
