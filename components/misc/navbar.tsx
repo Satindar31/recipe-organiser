@@ -1,53 +1,41 @@
-import { Inter } from "next/font/google";
-import { Button } from "@nextui-org/button";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-} from "@nextui-org/navbar";
-import {
-  currentUser,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
-import NavItem from "./navitem";
-import { Suspense } from "react";
-import { Spinner } from "@nextui-org/spinner";
-const interBlack = Inter({ weight: "900", subsets: ["latin"] });
+import { UserButton } from "@clerk/nextjs";
+import { ChefHatIcon } from "lucide-react";
+import Link from "next/link";
 
-export default async function NavComponent({ route }: { route: string }) {
-  const user = await currentUser();
-
+export default async function NavComponent() {
   return (
-    <Navbar shouldHideOnScroll className="bg-transparent border-b border-gray-200 p-4 filter backdrop-blur">
-      <NavbarBrand>
-        <p className={`font-bold text-black text-4xl ${interBlack.className}`}>
-          SavorSync
-        </p>
-      </NavbarBrand>
-      <NavItem active={route} />
-      <NavbarContent className="text-black" justify="end">
-        {!user ? (
-          <Suspense fallback={<Spinner />}>
-            <NavbarItem className="lg:flex">
-              <Button variant="bordered" color="primary">
-                <SignInButton mode="redirect" />
-              </Button>
-            </NavbarItem>
-            <NavbarItem>
-              <Button variant="solid" color="primary">
-                <SignUpButton mode="redirect" />
-              </Button>
-            </NavbarItem>
-          </Suspense>
-        ) : (
-          <Suspense fallback={<Spinner />}>
-            <UserButton />
-          </Suspense>
-        )}
-      </NavbarContent>
-    </Navbar>
+    <header className="px-4 lg:px-6 h-16 flex items-center">
+      <Link className="flex items-center justify-center" href="#">
+        <ChefHatIcon className="h-6 w-6" />
+        <span className="sr-only">RecipeShare</span>
+      </Link>
+      <nav className="ml-auto flex gap-4 sm:gap-6">
+        <Link
+          className="text-sm font-medium hover:underline underline-offset-4"
+          href="/#recipies"
+        >
+          Recipes
+        </Link>
+        <Link
+          className="text-sm font-medium hover:underline underline-offset-4"
+          href="/pricing"
+        >
+          Pricing
+        </Link>
+        <Link
+          className="text-sm font-medium hover:underline underline-offset-4"
+          href="/#testimonials"
+          scroll
+        >
+          Testimonials
+        </Link>
+        <Link
+          className="text-sm font-medium hover:underline underline-offset-4"
+          href="/contact"
+        >
+          Contact
+        </Link>
+      </nav>
+    </header>
   );
 }

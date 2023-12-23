@@ -5,6 +5,7 @@ import Image from "next/image";
 import { JSX, SVGProps, Suspense } from "react";
 import { SignUpButton, currentUser } from "@clerk/nextjs";
 import Script from "next/script";
+import { ChefHatIcon } from "lucide-react";
 
 export async function HomeComp() {
   const user = await currentUser();
@@ -18,13 +19,13 @@ export async function HomeComp() {
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <Link
             className="text-sm font-medium hover:underline underline-offset-4"
-            href="#"
+            href="#recipies"
           >
             Recipes
           </Link>
           <Link
             className="text-sm font-medium hover:underline underline-offset-4"
-            href="#"
+            href="/pricing"
           >
             Pricing
           </Link>
@@ -57,6 +58,7 @@ export async function HomeComp() {
                 height="550"
                 src="/hero-stock.jpg"
                 width="550"
+                priority
               />
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
@@ -70,7 +72,7 @@ export async function HomeComp() {
                 </div>
                 <div className="flex-col gap-2 min-[400px]:flex-row inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50">
                   {!user ? (
-                    <SignUpButton>Get started</SignUpButton>
+                    <SignUpButton redirectUrl="/dashboard">Get started</SignUpButton>
                   ) : (
                     <Link href="/dashboard">Go to dashboard</Link>
                   )}
@@ -79,7 +81,10 @@ export async function HomeComp() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
+        <section
+          className="w-full py-12 md:py-24 lg:py-32 bg-gray-100"
+          id="recipies"
+        >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm">
@@ -190,34 +195,20 @@ export async function HomeComp() {
           ></iframe>
         </Suspense>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
+          <Link
+            className="text-xs hover:underline underline-offset-4"
+            href="/tos"
+          >
             Terms of Service
           </Link>
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
+          <Link
+            className="text-xs hover:underline underline-offset-4"
+            href="/pp"
+          >
             Privacy
           </Link>
         </nav>
       </footer>
     </div>
-  );
-}
-
-function ChefHatIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
-      <line x1="6" x2="18" y1="17" y2="17" />
-    </svg>
   );
 }

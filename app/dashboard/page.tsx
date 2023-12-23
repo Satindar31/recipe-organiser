@@ -1,4 +1,5 @@
 import ButtonsBody from "@/components/dashboard/card/body-buttons";
+import NavComponent from "@/components/misc/navbar";
 import config from "@/config";
 import { IRecipe } from "@/interfaces/recipe";
 import { UserButton, currentUser } from "@clerk/nextjs";
@@ -25,8 +26,8 @@ export default async function Dashboard() {
 
   return (
     <div className="bg-white text-black">
-      <nav className="p-4 border-b border-gray-200 bg-transparent backdrop-blur">
-        <UserButton />
+      <nav className="p-4 border-b border-gray-200 bg-transparent backdrop-blur flex">
+        <NavComponent />
       </nav>
       <main className="p-4">
         <h1 className="text-6xl font-bold">Dashboard</h1>

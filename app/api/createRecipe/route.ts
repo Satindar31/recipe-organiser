@@ -19,8 +19,6 @@ export async function POST(req: Request) {
     userID: string;
     stepsJSON: JSONContent
   } = await req.json();
-
-  stepsJSON.sd
   try {
     const recipe = await prisma.recipe.create({
       data: {
