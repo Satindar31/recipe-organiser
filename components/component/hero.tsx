@@ -6,6 +6,7 @@ import { JSX, SVGProps, Suspense } from "react";
 import { SignUpButton, currentUser } from "@clerk/nextjs";
 import Script from "next/script";
 import { ChefHatIcon } from "lucide-react";
+import { UserButtonComp } from "../auth/userButton";
 
 export async function HomeComp() {
   const user = await currentUser();
@@ -42,6 +43,7 @@ export async function HomeComp() {
           >
             Contact
           </Link>
+          <UserButtonComp />
         </nav>
       </header>
       <Script

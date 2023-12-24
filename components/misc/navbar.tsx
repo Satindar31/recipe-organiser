@@ -1,6 +1,7 @@
 import { UserButton } from "@clerk/nextjs";
 import { ChefHatIcon } from "lucide-react";
 import Link from "next/link";
+import { UserButtonComp } from "../auth/userButton";
 
 export default async function NavComponent() {
   return (
@@ -35,6 +36,7 @@ export default async function NavComponent() {
         >
           Contact
         </Link>
+        <UserButtonComp />
       </nav>
     </header>
   );
