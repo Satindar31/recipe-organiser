@@ -24,6 +24,7 @@ model recipe {
   updatedAt    DateTime @updatedAt
   tagsId       Int?
   stepsJSON    Json @default("{}")
+  likes Int @default(0)
 }
 
 model tags {
