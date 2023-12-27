@@ -18,13 +18,13 @@ export async function PUT(req: Request) {
         likes: likes.valueOf() + 1,
       },
     });
-    return JSON.stringify(recipe);
+    return new Response(JSON.stringify(recipe));
   } catch (err) {
     log.info("Error while updating recipies", {
       error: err,
       errCode: errCode,
     });
-    return JSON.stringify(err);
+    return new Response(JSON.stringify(err));
   } finally {
     await log.flush();
     await prisma.$disconnect();
